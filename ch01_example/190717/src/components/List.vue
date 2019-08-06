@@ -13,7 +13,7 @@ import eventBus from '../EventBus'
 
 export default {
     created : function() {
-         eventBus.$on('add-todo', this.addTodo);
+         eventBus.$on('add-todo', this.addTodo);  // create 라이프사이클을 이용해서 인스턴스 생성된 후 이벤트 감지를 설정함
     },
     data : function() {
         return {

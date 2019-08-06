@@ -15,7 +15,7 @@ export default {
     },
     methods : {
         addTodo : function() {
-            eventBus.$emit('add-todo', this.todo);
+            eventBus.$emit('add-todo', this.todo); // 이벤트 발신하면서 현재 입력값 전달
             this.todo = "";
         }
     }

@@ -77,7 +77,7 @@
         },
         methods: {
             addTodo: function() {
-                eventBus.$emit('add-todo', this.todo);
+                eventBus.$emit('add-todo', this.todo); // 이벤트 발신하면서 현재 입력값 전달
                 this.todo = "";
             }
         }
@@ -153,7 +153,7 @@
     Vue.component('list-component', {
         template: '#list-template',
         created: function() {
-            eventBus.$on('add-todo', this.addTodo);
+            eventBus.$on('add-todo', this.addTodo); // create 라이프사이클을 이용해서 인스턴스 생성된 후 이벤트 감지를 설정함
         },
         data: function() {
             return {
