@@ -19,16 +19,21 @@
     </div>    
 </template>
 <script type="text/javascript">
-import eventBus from '../EventBus'
+// import eventBus from '../EventBus' 삭제
+import Constant from '../Constant' // 추가
 
 export default {
     name : 'input-todo',
     data : function() {
         return { todo : "" }
     },
+    // InputTodo.vue 는 로컬 상태 데이터를 가지고 있습니다.
+    // 이유는 이 상태 데이터는 다른 컴포넌트에서는 이용되지 않으며, 관리해야 할 만큼
+    // 중요한 데이터가 아니기 때문입니다.
     methods : {
         addTodo : function() {
-            eventBus.$emit('add-todo', this.todo);
+            // eventBus.$emit('add-todo', this.todo); 삭제
+            this.$store.commit(Constant.ADD_TODO, {todo: this.todo})
             this.todo = "";
         }
     }

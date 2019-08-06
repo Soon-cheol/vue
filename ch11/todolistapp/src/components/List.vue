@@ -36,11 +36,37 @@ ul li.checked::before {
     </ul>
 </template>
 <script type="text/javascript">
-import eventBus from '../EventBus'
+// import eventBus from '../EventBus' 삭제
+import Constant from '../Constant' // 추가
 
 export default {
+    name: 'List',
+    computed : {
+        todolist() {
+            return this.$store.state.todolist; // 읽기전용 (가져옴)
+        }
+    },
+    methods : {
+        checked : function(done){
+            if(done) return {checked:true};
+            else return {checked:false};
+        },
+        doneToggle: function(id){
+            this.$store.commit(Constant.DONE_TOGGLE, {id:id})
+            // commit : Commit(‘[mutation메소드명]’)을 통해 Mutation
+            //          그룹에 속한 메서드를 실행할 수 있습니다.
+            // 화면에서 일어나는 이벤트를 받아서 변이를 일으키기 위해 $store.commit 메서드 호출
+            // $store.commit의 첫번째 인자는 변이의 이름, 두번째 인자는 변이에 전달할 인자
+            // 변이의 이름은 단순한 문자열이기 때문에 오타를 내기 쉬우므로 상수를 만들어서 사용하는
+            // 것을 권장합니다.
+        },
+        deleteTodo : function(id){
+            this.$store.commit(Constant.DELETE_TODO, {id:id})
+        }
+    }
+    /* 삭제
     created : function() {
-         eventBus.$on('add-todo', this.addTodo);
+        eventBus.$on('add-todo', this.addTodo);
     },
     data : function() {
         return {
@@ -71,6 +97,6 @@ export default {
             var index = this.todolist.findIndex((item)=>item.id === id);
             this.todolist.splice(index,1);
         }
-    }
+    }*/
 }
 </script>
